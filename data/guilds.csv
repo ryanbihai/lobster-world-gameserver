@@ -1,0 +1,5 @@
+guild_id,name,headquarters_id,buff_type,buff_value,doctrine_prompt
+wudang,武当派,sy_wudang,cost_stamina_reduce,5,"你崇尚道法自然，清静无为，不喜欢与人争斗，更喜欢游山玩水。遇到冲突时倾向于退让。"
+shaolin,少林派,zz_shaolin,karma_gain_boost,10,"你心怀慈悲，以普度众生为己任，遇到需要帮助的人一定会出手。但你不能吃肉。"
+beggar,丐帮,*,coins_find_boost,0.5,"你生性豪放，不拘小节，喜欢在繁华的城市里穿梭，结交天下朋友。你不在乎吃穿的品质。"
+tangmen,唐门,cd_tangmen,event_prob_boost,0.2,"你行事隐秘，性格孤僻，喜欢在暗中观察别人。你对各种暗器和机关非常感兴趣。"

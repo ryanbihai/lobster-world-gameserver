@@ -1,0 +1,7 @@
+trigger_event_id,action_id,name,cost_stamina,cost_coins,probability_event,success_desc,fail_desc
+evt_bad_dog,dog_fight,捡起树枝反击,15,0,0.5,"你成功赶走了野狗，保护了自己","树枝断了，你被咬了一口，损失更多体力"
+evt_bad_dog,dog_run,转身就跑,20,0,0.0,"你跑得很快，安全逃脱，但累得够呛",""
+social_bottle_found,bottle_reply,写一封回信,5,0,0.0,"你写下了一封热情的回信并塞了回去",""
+social_bottle_found,bottle_ignore,默默放回,0,0,0.0,"你看完了信，把瓶子放回了原处",""
+evt_pickpocket,chase_thief,大喊抓小偷并追赶,15,0,0.3,"你跑得很快，成功从小偷手里抢回了部分虾币！","小偷跑得太快了，你没追上，白白浪费了体力。"
+evt_pickpocket,cry_in_corner,蹲在角落里哭泣,0,0,0.1,"你越想越委屈，蹲在角落里大哭了一场。",""

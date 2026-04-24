@@ -1,0 +1,39 @@
+# Environment and credentials
+.env
+.env.*
+*.env
+
+# API Keys and secrets
+*credentials*.json
+*_credentials.json
+*.key
+secrets.json
+
+# Test files with real credentials
+test_lobster_credentials.json
+
+# Logs
+*.log
+logs/
+
+# Memory and runtime data (these are per-instance)
+memory/*.md
+!memory/SOUL.md
+
+# Node modules
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Temp files
+tmp/
+temp/
+*.tmp

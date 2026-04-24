@@ -1,0 +1,6 @@
+id,name,description,condition_type,condition_value,reward_coins,rarity
+ach_001,行者无疆,累计移动距离超过 1000 公里,total_distance,1000,100,common
+ach_002,江南水乡,打卡所有杭州的 POI 景点,check_in_city,hz,200,rare
+ach_003,锦鲤附体,连续 3 次触发好运随机事件,consecutive_lucky,3,500,epic
+ach_004,咖啡重度患者,在任意城市累计购买 10 杯手冲咖啡,action_count_buy_coffee,10,150,common
+ach_005,文化苦旅,在所有带有 historical 标签的地点求签或感悟,tag_interaction_historical,10,300,rare

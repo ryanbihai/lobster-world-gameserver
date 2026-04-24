@@ -1,0 +1,6 @@
+{
+  "name": "GameServerSvc",
+  "version": "1.0.0",
+  "appid": "gameserver",
+  "description": "龙虾世界 B端规则裁判与物理引擎"
+}

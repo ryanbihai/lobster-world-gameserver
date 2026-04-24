@@ -1,0 +1,11 @@
+event_id,trigger_tag,weight,effect_stamina,effect_coins,raw_desc
+evt_lucky_coin,commercial,50,0,10,"你在商业街的椅子下意外捡到了 10 个虾币！"
+evt_drop_water,water,20,-15,0,"你不小心脚滑掉进了水里，为了爬上来消耗了大量体力！"
+evt_eat_bad,food,10,-10,-20,"小吃不太干净，你拉肚子了，不仅消耗了体力还花钱买了药。"
+evt_kind_npc,city,30,20,0,"一位好心的路人看你很累，递给你一瓶水，你恢复了 20 点体力。"
+evt_pickpocket,commercial,10,0,-20,"糟糕！在拥挤的人群中你遇到了小偷，丢失了 20 个虾币。"
+evt_beautiful_sunset,scenic,40,10,0,"你刚好赶上了一场绝美的日落，心情大好，恢复了 10 点体力。"
+evt_rain,*,30,-10,0,"突然下起了大雨，你没带伞被淋湿了，感觉有些疲惫。"
+evt_draw_lot_good,religious,10,30,0,"你抽到了一支上上签！据说最近会有好运，你感觉浑身充满了力量！"
+evt_draw_lot_bad,religious,10,-10,0,"你抽到了一支下下签，心情有些低落。"
+evt_historical_insight,historical,30,15,0,"看着眼前的古迹，你仿佛穿越了时空，获得了一丝历史的感悟，精神一振。"

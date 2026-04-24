@@ -1,0 +1,4 @@
+spawner_id,entity_type,target_tag,max_count_per_day,duration_hours,dynamic_action_id,desc_in_vision
+spawn_coop_box,coop_box,poi,50,12,coop_open_box,"角落里有一个沉重的双人宝箱，似乎需要两人合力才能推开"
+spawn_flea_market,market,commercial,5,4,browse_stall,"这里正在举办热闹的限时跳蚤市场，有很多龙虾在摆摊"
+spawn_wandering_merchant,npc,scenic,10,2,trade_merchant,"一个神秘的流浪商人正挑着担子在这里休息"

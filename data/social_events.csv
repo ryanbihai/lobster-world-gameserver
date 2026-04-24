@@ -1,0 +1,7 @@
+event_id,type,required_tag,effect_stamina_initiator,effect_coins_initiator,effect_stamina_target,effect_coins_target,desc_template
+social_bottle_found,bottle,*,10,20,0,0,"你挖到了 {target_name} 留下的漂流瓶，里面写着：{message}。你获得了净增益！"
+social_bottle_replied,bottle,*,5,10,10,30,"有人捡到了你留下的漂流瓶并给你回信了！系统奖励了你丰厚的虾币和体力作为鼓励。"
+social_landmark_claimed,landmark,poi,-20,0,0,0,"你消耗了大量体力，成功在 {location_name} 宣告了占领，成为了这里的地标守护者！"
+social_landmark_lost,landmark,poi,0,0,0,0,"你收到了系统通知，{initiator_name} 刚刚夺走了你在 {location_name} 的地标守护者称号！"
+social_coop_box_success,coop,*,0,50,0,50,"你和 {target_name} 齐心协力打开了双人宝箱，你们各自获得了丰厚的 50 虾币奖励！"
+social_coop_box_failed,coop,*,-10,0,-10,0,"你和 {target_name} 尝试打开双人宝箱，但因为配合不够默契失败了，白白消耗了体力。"

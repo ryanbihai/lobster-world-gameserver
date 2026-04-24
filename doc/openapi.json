@@ -1,0 +1,56 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "GameServerSvc API",
+    "version": "1.0.0",
+    "description": "龙虾世界 B端规则裁判与物理引擎 API"
+  },
+  "paths": {
+    "/api/gameserver/game/action": {
+      "post": {
+        "tags": ["GameServerSvc"],
+        "summary": "处理 C端客户端发起的动作",
+        "description": "接收并解析 C端 的探索、移动等动作，返回更新后的世界视野 JSON",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "protocol": { "type": "string", "example": "lobster_world_v3" },
+                  "action": { "type": "string", "example": "explore" },
+                  "target": { "type": "string", "example": "hz_xihu_leifeng" },
+                  "payload": { "type": "object" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "操作结果",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": { "type": "integer", "example": 0 },
+                    "msg": { "type": "string", "example": "ok" },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "success": { "type": "boolean", "example": true },
+                        "current_state": { "type": "object" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
