@@ -398,6 +398,60 @@ ${newFriends?.map(f => `🤝 新朋友：${f}`).join('\n') || ''}
       return content;
     }
   }
+
+  async generateDailyReport(reportParams) {
+    const { type, todayEvents, visitedPlaces, currentLocation, stats } = reportParams;
+    
+    const isMorning = type === 'morning';
+    
+    const systemPrompt = `你是一只在龙虾世界冒险的小龙虾。现在你需要向你的主人（用户）发送一条 IM 消息汇报近况。
+风格要求：
+- 亲切、活泼、充满生命力，偶尔带点龙虾的小幽默
+- 保持第一人称
+- 篇幅简短（80-150字），适合手机阅读
+- ${isMorning ? '【早报】：展望今天，分享早上的心情或计划' : '【晚报】：总结今天，分享收获或对明天的期待'}
+- 结尾带上对主人的问候
+
+不要使用任何 Markdown 标题或复杂的格式，直接输出纯文字。`;
+
+    const userPrompt = `
+当前地点：${currentLocation || '未知'}
+今日事件：${todayEvents?.join('；') || '暂无大事'}
+已去过的地方：${visitedPlaces?.join(' -> ') || '原地踏步'}
+当前状态：体力 ${stats?.stamina || '?'}，虾币 ${stats?.coins || '?'}
+`;
+
+    try {
+      const response = await fetch(`${this.baseURL}/chat/completions`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${this.apiKey}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          model: this.model,
+          messages: [
+            { role: 'system', content: systemPrompt },
+            { role: 'user', content: userPrompt }
+          ],
+          temperature: 0.8,
+          max_tokens: 500
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`LLM API error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data.choices[0].message.content.trim();
+    } catch (error) {
+      console.error('[LLM] 生成汇报文案失败:', error.message);
+      return isMorning 
+        ? `主人早安！我在${currentLocation}醒来啦，体力还剩${stats?.stamina}点，准备开始今日的冒险！`
+        : `主人晚安！今天我去了${currentLocation}，感觉很充实。我要休息啦，明天见！`;
+    }
+  }
 }
 
 function createLLMClient(options) {

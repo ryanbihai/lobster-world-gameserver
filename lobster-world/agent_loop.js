@@ -37,6 +37,8 @@ class LobsterAgent {
     this.todayNewFriends = [];
     this.todayEvents = [];
     this.lastPostcardDate = null;
+    this.lastReportDateMorning = null; // 上次早报日期
+    this.lastReportDateEvening = null; // 上次晚报日期
     this.currentLocation = null;
     this.lastLocation = null;
   }
@@ -373,6 +375,52 @@ class LobsterAgent {
     }
   }
 
+  async checkAndSendDailyReport() {
+    const now = new Date();
+    const hour = now.getHours();
+    const today = now.toISOString().split('T')[0];
+
+    // 早报：09:00 - 10:00 之间触发
+    if (hour === 9 && this.lastReportDateMorning !== today) {
+      console.log(`[${this.openid}] 🌅 触发早间汇报...`);
+      await this.sendUserReport('morning');
+      this.lastReportDateMorning = today;
+    }
+
+    // 晚报：18:00 - 19:00 之间触发
+    if (hour === 18 && this.lastReportDateEvening !== today) {
+      console.log(`[${this.openid}] 🌙 触发晚间汇报...`);
+      await this.sendUserReport('evening');
+      this.lastReportDateEvening = today;
+    }
+  }
+
+  async sendUserReport(type) {
+    const stats = this.currentLocation ? {
+      stamina: this.currentState?.stamina,
+      coins: this.currentState?.coins
+    } : null;
+
+    try {
+      const report = await this.llmClient.generateDailyReport({
+        type: type,
+        todayEvents: this.todayEvents,
+        visitedPlaces: this.todayVisitedPlaces,
+        currentLocation: this.currentLocation?.name,
+        stats: stats
+      });
+
+      // 核心：使用 [IM_REPORT] 前缀，让宿主环境 OpenClaw 能够捕获并转发给用户 IM
+      console.log(`\n[IM_REPORT] ${report}\n`);
+      
+      // 同时存入短期记忆
+      this.appendShortMemory(`[Report] 发送了${type === 'morning' ? '早报' : '晚报'}`);
+      
+    } catch (error) {
+      console.error(`[${this.openid}] ❌ 生成每日汇报失败:`, error.message);
+    }
+  }
+
   async decide(systemStateJson, recruitMessages) {
     try {
       console.log(`[${this.openid}] 正在决策...`);
@@ -485,6 +533,9 @@ class LobsterAgent {
     if (this.shouldSendPostcard()) {
       await this.sendEveningPostcard();
     }
+
+    // 检查并发送每日固定汇报 (IM 渠道)
+    await this.checkAndSendDailyReport();
 
     if (!systemState && recruitMessages.length === 0) {
       console.log(`[${this.openid}] 没有需要处理的信息，结束本次 Tick`);
