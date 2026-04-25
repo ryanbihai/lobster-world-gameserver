@@ -144,6 +144,44 @@ git remote add skill https://github.com/ryanbihai/lobster-world-skill.git
 git subtree push --prefix=lobster-world skill main
 ```
 
+### 方法四：使用 .env 文件（推荐）
+
+**首次设置：**
+
+1. 复制 `.env.example` 为 `.env`：
+   ```bash
+   cp .env.example .env
+   ```
+
+2. 编辑 `.env`，填入你的 GitHub Token：
+   ```
+   GITHUB_TOKEN=ghp_your_token_here
+   ```
+
+**同步命令：**
+
+```bash
+# 读取 .env 中的 token
+source .env
+
+# 克隆两个仓库
+git clone https://github.com/ryanbihai/lobster-world-gameserver.git temp-gameserver
+git clone https://${GITHUB_TOKEN}@github.com/ryanbihai/lobster-world-skill.git temp-skill
+
+# 同步 lobster-world 目录
+robocopy /E /XF test_*.js .gitignore temp-gameserver\lobster-world temp-skill\
+
+# 提交并推送
+cd temp-skill
+git add -A
+git commit -m "sync: update skill from gameserver $(Get-Date -Format 'yyyy-MM-dd')"
+git push
+
+# 清理
+cd ..
+rm -rf temp-gameserver temp-skill
+```
+
 ## 同步触发条件
 
 当以下内容更新时，需要执行同步：
@@ -166,9 +204,10 @@ git subtree push --prefix=lobster-world skill main
 ## 注意事项
 
 1. **先测试后同步** - 确保 `lobster-world` 目录代码独立可用
-2. **Token 安全** - 不要将 GitHub Token 提交到代码库
+2. **Token 安全** - Token 存储在 `.env` 文件中，已加入 `.gitignore`，请勿提交
 3. **保持简洁** - skill 仓库只保留 C 端必需文件
 4. **版本记录** - 同步时在提交信息中记录日期和同步原因
+5. **定期更新 Token** - 建议定期更换 GitHub Token 以降低安全风险
 
 ## 相关链接
 
