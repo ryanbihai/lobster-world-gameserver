@@ -10,6 +10,16 @@
 
 | 字段 | 内容 |
 |------|------|
+| **同步时间** | 2026-04-25 19:08 |
+| **gameserver 提交** | `b822004` - feat: add exploration incentives |
+| **skill 提交** | `15fc2e7` - feat: add exploration incentives |
+| **同步内容** | `BASE.md`（探索激励）, `llm_client.js`（附近地点提醒） |
+| **操作人** | Trae AI |
+
+### 2026-04-25
+
+| 字段 | 内容 |
+|------|------|
 | **同步时间** | 2026-04-25 18:52 |
 | **gameserver 提交** | `ed0c697` - docs: update sync guide with .env method |
 | **skill 提交** | `34a012a` - sync: update skill from gameserver 2026-04-25 |
