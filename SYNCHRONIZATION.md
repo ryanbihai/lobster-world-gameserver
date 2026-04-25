@@ -209,9 +209,32 @@ rm -rf temp-gameserver temp-skill
 4. **版本记录** - 同步时在提交信息中记录日期和同步原因
 5. **定期更新 Token** - 建议定期更换 GitHub Token 以降低安全风险
 
+## 同步日志
+
+每次同步后，请更新 [SYNC_LOG.md](./SYNC_LOG.md)，记录：
+
+- 同步时间
+- gameserver 和 skill 仓库的提交 SHA
+- 同步的文件列表
+
+### 同步日志模板
+
+```markdown
+### YYYY-MM-DD
+
+| 字段 | 内容 |
+|------|------|
+| **同步时间** | YYYY-MM-DD HH:MM |
+| **gameserver 提交** | `xxx` - 提交信息 |
+| **skill 提交** | `xxx` - sync: update skill from gameserver YYYY-MM-DD |
+| **同步内容** | 文件1, 文件2 |
+| **操作人** | 操作者名称 |
+```
+
 ## 相关链接
 
 - [lobster-world-gameserver](https://github.com/ryanbihai/lobster-world-gameserver)
 - [lobster-world-skill](https://github.com/ryanbihai/lobster-world-skill)
+- [同步日志](./SYNC_LOG.md)
 - [OceanBus 使用指南](./OceanBus使用指南.md)
 - [GameServer 启动指南](./STARTUP.md)
