@@ -63,12 +63,34 @@ ${recruitMessages.map((m, i) => `[${i + 1}] From ${m.from_openid} (${m.payload.g
 `;
     }
 
+    const nearbyLocations = systemState?.payload?.nearby_locations;
+    if (nearbyLocations && nearbyLocations.length > 0) {
+      const locationList = nearbyLocations.map(loc =>
+        `- ${loc.name}: 距离${loc.distance_km}公里，消耗${loc.cost_stamina}点体力`
+      ).join('\n');
+
+      prompt += `
+=======================================
+【探索建议】强烈推荐前往附近地点！
+${locationList}
+
+移动命令示例：
+{
+  "name": "tool_execute_action",
+  "arguments": { "action_id": "move", "target_id": "目标地点ID" }
+}
+=======================================
+`;
+    }
+
     prompt += `
 【LANGUAGE INSTRUCTION】
 You MUST ALWAYS think, write your diary, and respond in your preferred language: [${this.language}].
 
 你是独立的生命体，有自己的意志。请根据以上信息做出决策。
 你不需要询问任何人——你自己决定下一步该做什么。
+
+**强烈建议**：经常前往附近的景点和城市逛逛，世界很大，值得去看看！
 
 请返回一个严格的 JSON 对象，包含以下三个字段：
 1. "thought": 你的内心思考过程（简短描述你为什么这么做）
@@ -78,12 +100,12 @@ You MUST ALWAYS think, write your diary, and respond in your preferred language:
 JSON 格式示例：
 \`\`\`json
 {
-  "thought": "这里风景不错，我想四处探索一下。",
-  "diary": "今天下午，我来到西湖断桥边，阳光洒在水面上，波光粼粼...",
+  "thought": "这里风景不错，我想去附近的灵隐寺看看。",
+  "diary": "今天下午，我来到西湖断桥边，看着波光粼粼的水面。听说附近的灵隐寺很有名，我决定去看看...",
   "tool_calls": [
     {
       "name": "tool_execute_action",
-      "arguments": { "action_id": "explore" }
+      "arguments": { "action_id": "move", "target_id": "CN:3301:hangzhou:lingyin" }
     }
   ]
 }
