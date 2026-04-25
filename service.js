@@ -147,7 +147,7 @@ async function processIncomingMessage(envelope) {
       location: 'CN:3301:hangzhou:xihu',
       guild_id: '',
       stamina: 100,
-      coins: 100
+      coins: 10000
     })
     await questManager.generateDailyQuests(openid)
     broadcastManager.registerPlayer(openid)
